@@ -9,17 +9,10 @@
     <script>
 
       window.onload = function() {
-        var datapoints1 = <?php
-          $path = dirname($_SERVER["SCRIPT_FILENAME"]) . "/data/2021-06-22.json";
-          $str = file_get_contents($path);
-          $info = json_decode($str, true);
-
-          for ($x = 0; $x <= count($info)-1; $x ++) {
-            $final[$x]["x"] = round($info[$x]["time"]);
-            $final[$x]["y"] = round($info[$x]["temperatur"]);
-          }
-          echo json_encode($final, JSON_NUMERIC_CHECK);
-          ?>;
+        var datapoints1;
+        $.get("/home/temperatur.php", {date=""}, function(data) {
+          datapoints1 = JSON.parse(data);
+        });
         var interval = 5000
 
         var chart = new CanvasJS.Chart("chartContainer", {
@@ -59,9 +52,7 @@
     </script>
     <title></title>
   </head>
-  <body><?php
-      echo $final[count($final) - 1]["y"]
-      ?> °C
+  <body>
     <div id="chartContainer">
 
     </div>
