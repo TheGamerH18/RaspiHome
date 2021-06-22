@@ -8,10 +8,7 @@
     <script>
 
       window.onload = function() {
-        var datapoints1;
-        $.get("/home/temperatur.php", {date: ""}, function(data) {
-          datapoints1 = JSON.parse(data);
-        });
+        var datapoints1 = []
         var interval = 5000
 
         var chart = new CanvasJS.Chart("chartContainer", {
