@@ -36,8 +36,6 @@
           }]
         });
 
-				chart.render();
-
         function toggleDataSeries(e) {
           if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
             e.dataSeries.visible = false;
@@ -46,6 +44,15 @@
           }
           chart.render();
         }
+
+        function updateChart() {
+          $.get("/home/temperatur.php", {date: ""}, function(data) {
+            datapoints1 = JSON.parse(data);
+          });
+          chart.render();
+        }
+
+        setInterval(function(){updateChart()}, 2000);
 
       }
     </script>
