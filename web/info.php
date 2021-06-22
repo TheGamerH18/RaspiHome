@@ -2,7 +2,6 @@
 <html lang="en" dir="ltr">
   <head>
     <link rel="stylesheet" href="style.css">
-    <meta http-equiv="refresh" content="10">
     <meta charset="utf-8">
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
