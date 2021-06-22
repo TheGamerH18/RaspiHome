@@ -9,7 +9,7 @@
 
       window.onload = function() {
         var datapoints1 = [];
-        var interval = 5000
+        var interval = 30000;
 
         var chart = new CanvasJS.Chart("chartContainer", {
           zoomEnabled: true,
@@ -57,7 +57,7 @@
           chart.render();
         }
 
-        setInterval(function(){updateChart()}, 2000);
+        setInterval(function(){updateChart()}, interval);
 
       }
     </script>
