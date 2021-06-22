@@ -47,8 +47,13 @@
 
         function updateChart() {
           $.get("/home/temperatur.php", {date: ""}, function(data) {
-            datapoints1 = JSON.parse(data);
+            chartupdate(data);
           });
+        }
+
+        function chartupdate(data) {
+          datapoints1 = JSON.parse(data);
+          console.log(datapoints1);
           chart.render();
         }
 
