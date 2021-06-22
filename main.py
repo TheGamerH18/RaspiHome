@@ -39,7 +39,7 @@ def getvalues():
 def exportvalues():
     currentdate = datetime.now().strftime("%Y-%m-%d")
     try:
-        data = json.load(open("/var/www/html/data{0}.json".format(currentdate)))
+        data = json.load(open("web/data{0}.json".format(currentdate)))
     except OSError:
         data = [
 
@@ -48,7 +48,7 @@ def exportvalues():
         print("Error in JSON")
     currenttime = datetime.now().timestamp() * 1000
     data.append({"time": currenttime, "temperatur": temperatur, "humidity": humidity})
-    json.dump(data, open("/var/www/html/data{0}.json".format(currentdate), "w"), indent=4)
+    json.dump(data, open("web/data{0}.json".format(currentdate), "w"), indent=4)
 
 
 if __name__ == "__main__":
