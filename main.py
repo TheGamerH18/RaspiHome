@@ -1,4 +1,6 @@
 import json
+import os.path
+import sys
 import time
 from datetime import datetime
 
@@ -15,6 +17,7 @@ sensor = dht11.DHT11(pin=4)
 
 temperatur = ""
 humidity = ""
+path = os.path.dirname(os.path.abspath(sys.argv[0]))
 
 
 def main():
@@ -39,16 +42,14 @@ def getvalues():
 def exportvalues():
     currentdate = datetime.now().strftime("%Y-%m-%d")
     try:
-        data = json.load(open("web/data{0}.json".format(currentdate)))
+        data = json.load(open("{0}/web/data{1}.json".format(path, currentdate)))
     except OSError:
         data = [
 
         ]
-    except:
-        print("Error in JSON")
     currenttime = datetime.now().timestamp() * 1000
     data.append({"time": currenttime, "temperatur": temperatur, "humidity": humidity})
-    json.dump(data, open("web/data{0}.json".format(currentdate), "w"), indent=4)
+    json.dump(data, open("{0}/web/data{1}.json".format(path, currentdate), "w"), indent=4)
 
 
 if __name__ == "__main__":
