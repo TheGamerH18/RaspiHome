@@ -8,7 +8,7 @@
     <script>
 
       window.onload = function() {
-        var datapoints1 = []
+        var datapoints1 = [];
         var interval = 5000
 
         var chart = new CanvasJS.Chart("chartContainer", {
@@ -18,7 +18,7 @@
             text: "Temperatur"
           },
           axisY: {
-            suffix: " °C"
+            suffix: " Â°C"
           },
           toolTip: {
             shared: true
@@ -27,7 +27,7 @@
             type: "line",
             name: "Temperatur",
             xValueType: "dateTime",
-            yValueFormatString: "# °C",
+            yValueFormatString: "# Â°C",
             xValueFormatString: "hh:mm:ss",
             dataPoints: datapoints1
           }]
@@ -43,13 +43,16 @@
         }
 
         function updateChart() {
-          $.get("/home/temperatur.php", {date: ""}, function(data) {
+          $.getJSON("/home/temperatur.php", {date: ""}, function(data) {
             chartupdate(data);
           });
         }
 
         function chartupdate(data) {
-          datapoints1 = JSON.parse(data);
+          datapoints1.splice(0, datapoints1.length);
+          $.each(data, function(key, value){
+            datapoints1.push({x: value["x"], y: value["y"]})
+          });
           console.log(datapoints1);
           chart.render();
         }
