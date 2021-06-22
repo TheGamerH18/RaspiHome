@@ -15,6 +15,7 @@ GPIO.cleanup()
 # Set sensor Object
 sensor = dht11.DHT11(pin=4)
 
+# Initialize variables
 temperatur = ""
 humidity = ""
 path = os.path.dirname(os.path.abspath(sys.argv[0]))
@@ -28,6 +29,7 @@ def main():
 
 def getvalues():
     global temperatur, humidity
+    # fetch new data
     result = sensor.read()
     if result.is_valid():
         temperatur = result.temperature
@@ -40,16 +42,22 @@ def getvalues():
 
 
 def exportvalues():
+    # Currentdate as file name
     currentdate = datetime.now().strftime("%Y-%m-%d")
+    # Try load already fetched data from json file
     try:
-        data = json.load(open("{0}/web/data{1}.json".format(path, currentdate)))
+        data = json.load(open("{0}/web/data/{1}.json".format(path, currentdate)))
     except OSError:
+        # Create new
         data = [
 
         ]
+    # Currenttime as time stamp in data
     currenttime = datetime.now().timestamp() * 1000
+    # Add data
     data.append({"time": currenttime, "temperatur": temperatur, "humidity": humidity})
-    json.dump(data, open("{0}/web/data{1}.json".format(path, currentdate), "w"), indent=4)
+    # Dump to file
+    json.dump(data, open("{0}/web/data/{1}.json".format(path, currentdate), "w"), indent=4)
 
 
 if __name__ == "__main__":
