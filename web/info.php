@@ -32,6 +32,7 @@
             dataPoints: datapoints1
           }]
         });
+        updateChart();
 
         function toggleDataSeries(e) {
           if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
