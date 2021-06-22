@@ -37,21 +37,12 @@
           toolTip: {
             shared: true
           },
-          legend: {
-            cursor: "pointer",
-            verticalAlign: "top",
-            fontSize: 22,
-            fontColor: "dimGrey",
-            itemclick: toggleDataSeries
-          },
           data: [{
             type: "line",
             name: "Temperatur",
             xValueType: "dateTime",
             yValueFormatString: "# °C",
             xValueFormatString: "hh:mm:ss",
-            showInLegend: true,
-            legendText: "{name}",
             dataPoints: datapoints1
           }]
         });
