@@ -28,9 +28,6 @@
           title: {
             text: "Temperatur"
           },
-          axisX: {
-            title: "Chart updates every some seconds"
-          },
           axisY: {
             suffix: " °C"
           },
