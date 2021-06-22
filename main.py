@@ -24,7 +24,7 @@ path = os.path.dirname(os.path.abspath(sys.argv[0]))
 def main():
     while True:
         getvalues()
-        time.sleep(5)
+        time.sleep(30)
 
 
 def getvalues():
