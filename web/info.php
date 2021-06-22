@@ -10,7 +10,7 @@
 
       window.onload = function() {
         var datapoints1;
-        $.get("/home/temperatur.php", {date=""}, function(data) {
+        $.get("/home/temperatur.php", {date: ""}, function(data) {
           datapoints1 = JSON.parse(data);
         });
         var interval = 5000
