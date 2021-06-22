@@ -7,10 +7,11 @@
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        
+
       window.onload = function() {
         var datapoints1 = <?php
-          $str = file_get_contents("data2021-06-19.json");
+          $path = dirname($_SERVER["SCRIPT_FILENAME"]) . "/data2021-06-22.json";
+          $str = file_get_contents($path);
           $info = json_decode($str, true);
 
           for ($x = 0; $x <= count($info)-1; $x ++) {
@@ -65,7 +66,7 @@
           }
           chart.render();
         }
-        
+
       }
     </script>
     <title></title>
