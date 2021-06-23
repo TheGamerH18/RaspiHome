@@ -1,5 +1,6 @@
 <?php
-  $path = dirname($_SERVER["SCRIPT_FILENAME"]) . "/data/2021-06-22.json";
+  $date = $_GET["date"];
+  $path = dirname($_SERVER["SCRIPT_FILENAME"]) . "/data/$date.json";
   $str = file_get_contents($path);
   $info = json_decode($str, true);
 
