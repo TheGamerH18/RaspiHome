@@ -12,13 +12,24 @@
         var interval = 30000;
 
         var chart = new CanvasJS.Chart("chartContainer", {
+          animationEnabled: true,
           zoomEnabled: true,
-          theme: "dark1",
+          backgroundColor: "#1A1A1A",
           title: {
+            fontColor: "white",
             text: "Temperatur"
           },
+          toolTip: {
+            cornerRadius: 3,
+            fontColor: "white",
+            backgroundColor: "#1F1F1F"
+          },
           axisY: {
-            suffix: " Â°C"
+            suffix: " °C",
+            labelFontColor: "white"
+          },
+          axisX: {
+            labelFontColor: "white"
           },
           toolTip: {
             shared: true
@@ -28,7 +39,7 @@
             name: "Temperatur",
             xValueType: "dateTime",
             yValueFormatString: "# Â°C",
-            xValueFormatString: "hh:mm:ss",
+            xValueFormatString: "HH:mm:ss",
             dataPoints: datapoints1
           }]
         });
