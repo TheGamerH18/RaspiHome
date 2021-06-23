@@ -1,4 +1,18 @@
 body {
-    background-color: #2A2A2A;
+    background-color: #1F1F1F;
     color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.chartContainerbig {
+  padding: 10px;
+  border-radius: 5px;
+  background: #1A1A1A;
+  height: 300px;
+  width: 95%;
+}
+
+#chartContainer {
+  height: 100%;
 }
