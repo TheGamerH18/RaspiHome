@@ -9,10 +9,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="scroller.js" charset="utf-8"></script>
+    <script src="scroller.min.js" charset="utf-8"></script>
     <script>
 
       window.onload = function() {
+        var temperaturescroller = Scroller.getNewInstance({
+          width: 200,
+          amount: 100,
+          interval: 2500
+        });
+        temperaturescroller.appendTo(document.getElementById("numbercontainer"));
+        temperaturescroller.start("00")
+
         var datapoints1 = [];
         var interval = 30000;
 
@@ -74,6 +82,10 @@
           });
           console.log(datapoints1);
           chart.render();
+
+          var content = datapoints1[datapoints1.length-1]["y"]+"";
+          temperaturescroller.scrollTo(content);
+          console.log(datapoints1[datapoints1.length-1]["y"]);
         }
 
         setInterval(function(){updateChart()}, interval);
