@@ -1,5 +1,5 @@
 body {
-    background-color: #1F1F1F;
+    background-color: #2A2A2A;
     color: white;
     display: flex;
     justify-content: center;
@@ -8,7 +8,7 @@ body {
 
 .chartContainerbig {
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   background: #1A1A1A;
   height: 500px;
   width: 95%;
@@ -16,4 +16,12 @@ body {
 
 #chartContainer {
   height: 100%;
+}
+
+#numbercontainerbig {
+  background: #1A1A1A;
+  margin: 20px;
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
 }
