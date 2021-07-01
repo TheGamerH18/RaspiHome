@@ -23,21 +23,21 @@ path = os.path.dirname(os.path.abspath(sys.argv[0]))
 
 # Data for 7 segment display
 # Pins of Segments
-segments =  [6, 11, 16, 20, 21, 5, 19, 26]
+segments = [6, 11, 16, 20, 21, 5, 19, 26]
 # Pins of Digits
 digits = [12, 7, 8, 13]
 # Data to display numbers
-num = {' ':[1,1,1,1,1,1,1],
-    '0':[0,0,0,0,0,0,1],
-    '1':[1,0,0,1,1,1,1],
-    '2':[0,0,1,0,0,1,0],
-    '3':[0,0,0,0,1,1,0],
-    '4':[1,0,0,1,1,0,0],
-    '5':[0,1,0,0,1,0,0],
-    '6':[0,1,0,0,0,0,0],
-    '7':[0,0,0,1,1,1,1],
-    '8':[0,0,0,0,0,0,0],
-    '9':[0,0,0,0,1,0,0]}
+num = {' ': [1, 1, 1, 1, 1, 1, 1],
+       '0': [0, 0, 0, 0, 0, 0, 1],
+       '1': [1, 0, 0, 1, 1, 1, 1],
+       '2': [0, 0, 1, 0, 0, 1, 0],
+       '3': [0, 0, 0, 0, 1, 1, 0],
+       '4': [1, 0, 0, 1, 1, 0, 0],
+       '5': [0, 1, 0, 0, 1, 0, 0],
+       '6': [0, 1, 0, 0, 0, 0, 0],
+       '7': [0, 0, 0, 1, 1, 1, 1],
+       '8': [0, 0, 0, 0, 0, 0, 0],
+       '9': [0, 0, 0, 0, 1, 0, 0]}
 # Init digits
 for digit in digits:
     GPIO.setup(digit, GPIO.OUT)
@@ -46,6 +46,7 @@ for digit in digits:
 for segment in segments:
     GPIO.setup(segment, GPIO.OUT)
     GPIO.output(segment, 1)
+
 
 def main():
     try:
