@@ -51,11 +51,12 @@ for segment in segments:
 def main():
     try:
         # Create Thread for Clock
-        th = Thread(target=currenttime)
-        th.start()
-        while True:
-            getvalues()
-            time.sleep(30)
+        ct = Thread(target=showcurrenttime)
+        ct.start()
+
+        # Create Thread for Temperatur and Humidity
+        tp = Thread(target=messuretemperatur)
+        tp.start()
     finally:
         GPIO.cleanup()
 
@@ -92,7 +93,8 @@ def exportvalues():
     # Dump to file
     json.dump(data, open("{0}/web/data/{1}.json".format(path, currentdate), "w"), indent=4)
 
-def currenttime():
+
+def showcurrenttime():
     while True:
         # Get current time
         dtstring = datetime.now().strftime("%H%M")
@@ -107,6 +109,13 @@ def currenttime():
             time.sleep(0.002)
             # Close Digit
             GPIO.output(digits[index], 0)
+
+
+def measuretemperatur():
+    while True:
+        getvalues()
+        time.sleep(30)
+
 
 if __name__ == "__main__":
     main()
