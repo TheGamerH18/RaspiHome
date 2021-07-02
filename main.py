@@ -68,11 +68,7 @@ def getvalues():
     if result.is_valid():
         temperatur = result.temperature
         humidity = result.humidity
-        print("Temperatur: %-3.1f C" % result.temperature)
-        print("Humidity: %-3.1f %%" % result.humidity)
         exportvalues()
-    else:
-        print("Error: %d" % result.error_code)
 
 
 def exportvalues():
