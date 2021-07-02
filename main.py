@@ -54,9 +54,9 @@ def main():
         ct = Thread(target=showcurrenttime)
         ct.start()
 
-        # Create Thread for Temperatur and Humidity
-        tp = Thread(target=measuretemperatur)
-        tp.start()
+        # Run Temperature Measurement on Main Thread
+        measuretemperatur()
+
     finally:
         GPIO.cleanup()
 
