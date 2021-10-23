@@ -72,9 +72,9 @@ def exportvalues():
 def showcurrenttime():
     while True:
         # Get current time
-        dtstring = datetime.now().strftime("%H%M")
+        dtstring = datetime.now().strftime("%S:%H:%M %D.%m.%Y")
         with canvas(device) as draw:
-            draw.text((5, 5), dtstring, fille="white")
+            draw.text((5, 5), dtstring, fill="white")
 
 
 def measuretemperatur():
