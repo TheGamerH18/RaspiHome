@@ -72,7 +72,7 @@ def exportvalues():
 def showcurrenttime():
     while True:
         # Get current time
-        dtstring = datetime.now().strftime("%S:%H:%M %d.%m.%Y")
+        dtstring = datetime.now().strftime("%H:%M:%S %d.%m.%Y")
         with canvas(device) as draw:
             draw.text((5, 5), dtstring, fill="white")
 
