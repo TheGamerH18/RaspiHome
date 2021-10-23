@@ -4,6 +4,9 @@ import sys
 import time
 from datetime import datetime
 from threading import Thread
+from luma.core.interface.serial import spi
+from luma.core.render import canvas
+from luma.lcd.device import st7735
 
 import RPi.GPIO as GPIO
 import dht11
@@ -13,6 +16,9 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.cleanup()
 
+serial = spi(port=0, device=0, gpio_DC=24, gpio_RST=25)
+device = st7735(serial)
+
 # Set sensor Object
 sensor = dht11.DHT11(pin=4)
 
@@ -20,33 +26,6 @@ sensor = dht11.DHT11(pin=4)
 temperatur = ""
 humidity = ""
 path = os.path.dirname(os.path.abspath(sys.argv[0]))
-
-# Data for 7 segment display
-# Pins of Segments
-segments = [6, 11, 16, 20, 21, 5, 19, 26]
-# Pins of Digits
-digits = [12, 7, 8, 13]
-# Data to display numbers
-num = {' ': [1, 1, 1, 1, 1, 1, 1],
-       '0': [0, 0, 0, 0, 0, 0, 1],
-       '1': [1, 0, 0, 1, 1, 1, 1],
-       '2': [0, 0, 1, 0, 0, 1, 0],
-       '3': [0, 0, 0, 0, 1, 1, 0],
-       '4': [1, 0, 0, 1, 1, 0, 0],
-       '5': [0, 1, 0, 0, 1, 0, 0],
-       '6': [0, 1, 0, 0, 0, 0, 0],
-       '7': [0, 0, 0, 1, 1, 1, 1],
-       '8': [0, 0, 0, 0, 0, 0, 0],
-       '9': [0, 0, 0, 0, 1, 0, 0]}
-# Init digits
-for digit in digits:
-    GPIO.setup(digit, GPIO.OUT)
-    GPIO.output(digit, 0)
-# Init segments
-for segment in segments:
-    GPIO.setup(segment, GPIO.OUT)
-    GPIO.output(segment, 1)
-
 
 def main():
     try:
@@ -94,17 +73,8 @@ def showcurrenttime():
     while True:
         # Get current time
         dtstring = datetime.now().strftime("%H%M")
-        # Loop through dtstring to get specific Digits
-        for index in range(0, len(dtstring)):
-            # Select digit
-            GPIO.output(digits[index], 1)
-            # Show number on Digit
-            for integ in range(0, 7):
-                # Selects the Segmen 0-7, defines if it is on or off
-                GPIO.output(segments[integ], num[dtstring[index]][integ])
-            time.sleep(0.002)
-            # Close Digit
-            GPIO.output(digits[index], 0)
+        with canvas(device) as draw:
+            draw.text((5, 5), dtstring, fille="white")
 
 
 def measuretemperatur():
