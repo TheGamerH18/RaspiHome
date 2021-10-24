@@ -23,9 +23,9 @@ serial = spi(port=0, device=0, gpio_DC=24, gpio_RST=25)
 device = st7735(serial)
 
 # Load Font
-fontsize = 24
 fonturl = "https://raw.githubusercontent.com/googlefonts/roboto/main/src/hinted/Roboto-Regular.ttf"
-font24 = ImageFont.truetype(urlopen(fonturl), size=fontsize)
+font24 = ImageFont.truetype(urlopen(fonturl), size=24)
+font16 = ImageFont.truetype(urlopen(fonturl), size=16)
 
 # Set sensor Object
 sensor = dht11.DHT11(pin=4)
@@ -85,7 +85,7 @@ def showcurrenttime():
         datestring = datetime.now().strftime("%d.%m.%Y")
         with canvas(device) as draw:
             draw.text((5, 5), timestring, font=font24, fill="white")
-
+            draw.text((5,32), datestring, font=font16, fill="white")
 
 def measuretemperatur():
     while True:
