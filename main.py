@@ -33,6 +33,8 @@ sensor = dht11.DHT11(pin=4)
 # Initialize variables
 temperatur = ""
 humidity = ""
+# currently measuring
+measuring = False
 path = os.path.dirname(os.path.abspath(sys.argv[0]))
 
 def main():
@@ -45,6 +47,7 @@ def main():
         measuretemperatur()
 
     finally:
+        # Cleanup on end of programm
         GPIO.cleanup()
         device.cleanup()
 
@@ -54,12 +57,15 @@ def getvalues():
     # fetch new data
     result = sensor.read()
     if result.is_valid():
+        # Save Data to var
         temperatur = result.temperature
         humidity = result.humidity
+        # Save Data to values
         exportvalues()
 
 
 def exportvalues():
+    global temperatur, humidity
     # Currentdate as file name
     currentdate = datetime.now().strftime("%Y-%m-%d")
     # Try load already fetched data from json file
@@ -86,10 +92,15 @@ def showcurrenttime():
         with canvas(device) as draw:
             draw.text((2, 2), timestring, font=font24, fill="white")
             draw.text((5,29), datestring, font=font16, fill="white")
+            draw.text((2,109), str(temperatur) + " C", font=font16, fill="white")
+            if measuring:
+                draw.text((2, 90), "Measuring", font=font16, fill="red")
 
 def measuretemperatur():
     while True:
+        measuring = True
         getvalues()
+        measuring = False
         time.sleep(30)
 
 
