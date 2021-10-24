@@ -28,7 +28,7 @@ font24 = ImageFont.truetype(urlopen(fonturl), size=24)
 font16 = ImageFont.truetype(urlopen(fonturl), size=16)
 
 # Set sensor Object
-sensor = dht11.DHT11(pin=4)
+sensor = dht11.DHT11(pin=22)
 
 # Initialize variables
 temperatur = ""
