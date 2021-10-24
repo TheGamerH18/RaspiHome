@@ -84,8 +84,8 @@ def showcurrenttime():
         timestring = datetime.now().strftime("%H:%M:%S")
         datestring = datetime.now().strftime("%d.%m.%Y")
         with canvas(device) as draw:
-            draw.text((5, 5), timestring, font=font24, fill="white")
-            draw.text((5,32), datestring, font=font16, fill="white")
+            draw.text((2, 2), timestring, font=font24, fill="white")
+            draw.text((5,29), datestring, font=font16, fill="white")
 
 def measuretemperatur():
     while True:
