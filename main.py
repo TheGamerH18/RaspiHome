@@ -7,6 +7,8 @@ from threading import Thread
 from luma.core.interface.serial import spi
 from luma.core.render import canvas
 from luma.lcd.device import st7735
+from PIL import ImageFont
+from urllib.request import urlopen
 
 import RPi.GPIO as GPIO
 import dht11
@@ -16,8 +18,14 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.cleanup()
 
+# Initialize / Configure Display
 serial = spi(port=0, device=0, gpio_DC=24, gpio_RST=25)
 device = st7735(serial)
+
+# Load Font
+fontsize = 24
+fonturl = "https://raw.githubusercontent.com/googlefonts/roboto/main/src/hinted/Roboto-Regular.ttf"
+font24 = ImageFont.truetype(urlopen(fonturl), size=fontsize)
 
 # Set sensor Object
 sensor = dht11.DHT11(pin=4)
@@ -38,6 +46,7 @@ def main():
 
     finally:
         GPIO.cleanup()
+        device.cleanup()
 
 
 def getvalues():
@@ -72,9 +81,10 @@ def exportvalues():
 def showcurrenttime():
     while True:
         # Get current time
-        dtstring = datetime.now().strftime("%H:%M:%S %d.%m.%Y")
+        timestring = datetime.now().strftime("%H:%M:%S")
+        datestring = datetime.now().strftime("%d.%m.%Y")
         with canvas(device) as draw:
-            draw.text((5, 5), dtstring, fill="white")
+            draw.text((5, 5), timestring, font=font24, fill="white")
 
 
 def measuretemperatur():
